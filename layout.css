@@ -6,9 +6,7 @@
    1. VARIÁVEIS CSS
    ======================================== */
 :root {
-    --bg-primary: #0E131F;
-    --bg-body: #f8f9fa;
-    --bg-card: #ffffff;
+    --bg-primary: #03061a;    
     --text-primary: #212529;
     --text-secondary: #6c757d;
     --border-color: #dee2e6;
@@ -21,7 +19,7 @@
 }
 
 [data-theme="dark"] {
-    --bg-body: #1a1a1a;
+    --bg-body: #3C3C3F;
     --bg-card: #2d2d30;
     --text-primary: #ffffff;
     --text-secondary: #b3b3b3;
@@ -89,6 +87,26 @@ body {
 .form-control::placeholder {
     color: var(--text-secondary);
 }
+
+.preview-card-container {
+    position: fixed;
+    bottom: 20px; /* Distância do rodapé */
+    right: 20px; /* Distância da lateral direita */
+    width: 300px; /* Largura reduzida para o estado minimizado */
+    max-height: 200px; /* Altura máxima para o estado minimizado */
+    overflow: hidden;
+    z-index: 1050; /* Garante que fique acima de outros elementos */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+    /* Exemplo de expansão ao passar o mouse ou clicar */
+    .preview-card-container:hover {
+        max-height: 500px; /* Expande a altura */
+        width: 350px; /* Expande a largura */
+    }
+
 
 /* ========================================
    4. BOTÕES
