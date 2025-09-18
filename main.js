@@ -1095,6 +1095,15 @@ const Validators = {
             email: cleanEmail,
             error: emailRegex.test(cleanEmail) ? null : 'E-mail inválido'
         };
+    },
+
+    campaignId() {
+        const campaignId = document.getElementById('campaignIdInput')?.value?.trim() || '';
+        return {
+            valid: !!campaignId,
+            campaignId,
+            error: !campaignId ? 'Identificador da campanha é obrigatório' : null
+        };
     }
 };
 
@@ -2422,6 +2431,15 @@ const SendingManager = {
                 };
             }
 
+            // ✅ NOVA VALIDAÇÃO: Identificador da Campanha
+            const campaignValidation = Validators.campaignId();
+            if (!campaignValidation.valid) {
+                return {
+                    valid: false,
+                    error: campaignValidation.error
+                };
+            }
+
             // Verificar e-mail se habilitado
             const emailEnabled = document.getElementById('enableEmailSending')?.checked;
             if (emailEnabled) {
@@ -2663,7 +2681,8 @@ const SendingManager = {
             media: currentMedia,
             sendEmail: !!contact.email && document.getElementById('enableEmailSending')?.checked,
             emailSubject: EmailSubjectManager.processEmailSubject(EmailSubjectManager.getEmailSubject(), contact.name), // ✅ NOVO
-            messageId: currentMessageId
+            messageId: currentMessageId,
+            campaignId: document.getElementById('campaignIdInput')?.value || null
         };
 
         console.log(`📤 Payload "${currentMessageId}" sendo enviado:`, {
